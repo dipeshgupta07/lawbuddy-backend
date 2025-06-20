@@ -36,6 +36,9 @@ def load_dependencies():
             sources = meta["sources"]
     if model is None:
         model = SentenceTransformer("all-MiniLM-L6-v2")
+@app.get("/")
+def read_root():
+    return {"message": "LawBuddy API is live"}
 
 @app.post("/ask")
 async def ask_question(request: Request):
