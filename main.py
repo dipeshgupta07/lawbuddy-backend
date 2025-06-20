@@ -2,6 +2,7 @@
 
 import os
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from sentence_transformers import SentenceTransformer
 import faiss
 import pickle
@@ -9,6 +10,14 @@ import numpy as np
 from groq import Groq
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace with frontend domain in prod
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Lazy globals
 index = None
